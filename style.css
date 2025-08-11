@@ -1,0 +1,494 @@
+/* ===================================
+   CodeSonic Lab - Complete Styles
+   =================================== */
+
+/* CSS Variables */
+:root {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #1a1a1a;
+    --text-primary: #ffffff;
+    --text-secondary: #b4befe;
+    --accent-cyan: #00ffff;
+    --accent-lime: #a6ff00;
+    --accent-purple: #b4befe;
+    --accent-magenta: #ff00ff;
+    --font-mono: 'Fira Code', monospace;
+    --font-body: 'Lexend', sans-serif;
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* CRT Effect */
+.crt-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+    background: 
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 255, 0, 0.03) 2px,
+            rgba(0, 255, 0, 0.03) 4px
+        );
+    animation: flicker 0.1s infinite linear alternate;
+}
+
+@keyframes flicker {
+    0% { opacity: 1; }
+    100% { opacity: 0.98; }
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 50px;
+    padding: 40px 0;
+}
+
+.title-wrapper {
+    margin-bottom: 30px;
+}
+
+.glitch {
+    font-size: 3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent-cyan);
+    text-shadow: 
+        0 0 5px var(--accent-cyan),
+        0 0 10px var(--accent-cyan),
+        0 0 15px var(--accent-cyan);
+    animation: glitch 2s infinite;
+}
+
+@keyframes glitch {
+    0%, 100% { transform: translate(0, 0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+}
+
+.tagline {
+    font-family: var(--font-mono);
+    color: var(--accent-lime);
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+.terminal-ascii {
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    background: rgba(180, 190, 254, 0.05);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(180, 190, 254, 0.1);
+}
+
+/* Sections */
+section {
+    margin-bottom: 60px;
+    padding: 30px;
+    background: rgba(180, 190, 254, 0.02);
+    border-radius: 12px;
+    border: 1px solid rgba(180, 190, 254, 0.1);
+}
+
+section h2 {
+    font-size: 2rem;
+    color: var(--accent-lime);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.ascii-icon {
+    font-family: var(--font-mono);
+    color: var(--accent-cyan);
+}
+
+/* Interactive Playground */
+.playground-container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.glow-btn {
+    background: rgba(180, 190, 254, 0.1);
+    border: 2px solid var(--accent-purple);
+    color: var(--text-primary);
+    padding: 15px 25px;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.glow-btn:hover {
+    background: rgba(180, 190, 254, 0.2);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.glow-btn.active {
+    background: rgba(0, 255, 255, 0.2);
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+}
+
+.instructions {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border-left: 4px solid var(--accent-magenta);
+}
+
+.instructions p {
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+}
+
+.instructions .small {
+    font-size: 0.9rem;
+    color: var(--accent-purple);
+}
+
+.playground-instructions {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--text-secondary);
+}
+
+.strudel-iframe {
+    width: 100%;
+    height: 600px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid rgba(180, 190, 254, 0.2);
+}
+
+.strudel-iframe iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Code Snippets Section */
+#code-snippets {
+    margin-top: 40px;
+}
+
+.snippet-intro {
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.snippet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.snippet-card {
+    background: rgba(180, 190, 254, 0.05);
+    border: 1px solid rgba(180, 190, 254, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.snippet-card:hover {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+}
+
+.snippet-card h3 {
+    color: var(--accent-lime);
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.snippet-card pre {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    padding: 12px;
+    overflow-x: auto;
+    margin: 0 0 15px 0;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--accent-purple);
+    border-left: 3px solid var(--accent-magenta);
+}
+
+.snippet-card code {
+    font-family: inherit;
+    white-space: pre-wrap;
+}
+
+.copy-btn {
+    background: rgba(180, 190, 254, 0.1);
+    border: 1px solid var(--accent-purple);
+    color: var(--accent-purple);
+    padding: 8px 15px;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.copy-btn:hover {
+    background: rgba(180, 190, 254, 0.2);
+    color: var(--accent-cyan);
+    border-color: var(--accent-cyan);
+}
+
+.copy-btn:active {
+    transform: translateY(1px);
+}
+
+/* Milestones */
+.milestones-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.milestone-card {
+    background: rgba(180, 190, 254, 0.05);
+    border: 1px solid rgba(180, 190, 254, 0.1);
+    border-radius: 8px;
+    padding: 25px;
+    transition: all 0.3s ease;
+}
+
+.milestone-card:hover {
+    border-color: var(--accent-lime);
+    box-shadow: 0 0 15px rgba(166, 255, 0, 0.1);
+}
+
+.milestone-card.completed {
+    border-color: var(--accent-cyan);
+    background: rgba(0, 255, 255, 0.05);
+}
+
+.milestone-card h3 {
+    color: var(--accent-lime);
+    margin-bottom: 15px;
+}
+
+.milestone-link {
+    color: var(--accent-cyan);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    border: 1px solid var(--accent-cyan);
+    padding: 8px 16px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+}
+
+.milestone-link:hover {
+    background: rgba(0, 255, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+/* Toolbox */
+.tool-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.tool-card {
+    background: rgba(180, 190, 254, 0.05);
+    border: 1px solid rgba(180, 190, 254, 0.1);
+    border-radius: 8px;
+    padding: 25px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.tool-card:hover {
+    border-color: var(--accent-magenta);
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.tool-card h3 {
+    color: var(--accent-magenta);
+    margin-bottom: 10px;
+}
+
+/* Tutorials */
+.tutorial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.tutorial-card {
+    background: rgba(180, 190, 254, 0.05);
+    border: 1px solid rgba(180, 190, 254, 0.1);
+    border-radius: 8px;
+    padding: 25px;
+}
+
+.tutorial-card h3 {
+    color: var(--accent-purple);
+    margin-bottom: 20px;
+}
+
+.tutorial-card ul {
+    list-style: none;
+}
+
+.tutorial-card li {
+    margin-bottom: 10px;
+}
+
+.tutorial-card a {
+    color: var(--accent-cyan);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.tutorial-card a:hover {
+    color: var(--accent-lime);
+    text-shadow: 0 0 5px var(--accent-lime);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 40px 0;
+    border-top: 1px solid rgba(180, 190, 254, 0.1);
+    margin-top: 50px;
+}
+
+footer p {
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+}
+
+footer .small {
+    font-size: 0.9rem;
+    color: var(--accent-purple);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .glitch {
+        font-size: 2rem;
+    }
+    
+    .playground-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .controls {
+        order: 2;
+    }
+    
+    .strudel-iframe {
+        order: 1;
+        height: 400px;
+    }
+    
+    .snippet-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .snippet-card {
+        padding: 15px;
+    }
+    
+    .copy-btn {
+        padding: 10px;
+        font-size: 1rem;
+    }
+    
+    section {
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+    
+    section h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Mobile optimizations for snippets */
+@media (hover: none) {
+    .snippet-card {
+        position: relative;
+    }
+    
+    .snippet-card::after {
+        content: "Tap to select, then copy";
+        position: absolute;
+        bottom: -20px;
+        left: 0;
+        width: 100%;
+        font-size: 0.7rem;
+        color: var(--text-secondary);
+        text-align: center;
+    }
+}

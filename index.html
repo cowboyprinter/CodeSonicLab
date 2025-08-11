@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeSonic Lab | Craft Sound with Code</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Lexend:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="crt-effect"></div>
+    <div class="container">
+        <header id="header">
+            <div class="title-wrapper">
+                <h1 class="glitch" data-text="CodeSonic Lab">CodeSonic Lab</h1>
+                <p class="tagline">// Craft Sound with Code //</p>
+            </div>
+            <div class="terminal-ascii">
+                <pre>
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    T H E     C O W B O Y     P R I N T E R
+~ __  __ _   _ ____ ___ ____   ____   _____  __~
+~|  \/  | | | / ___|_ _/ ___| | __ ) / _ \ \/ /~
+~| |\/| | | | \___ \| | |     |  _ \| | | \  / ~
+~| |  | | |_| |___) | | |___  | |_) | |_| /  \ ~
+~|_|  |_|\___/|____/___\____| |____/ \___/_/\_\~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                
+♬  ♩   ♪   ♫     ♬    ♩   ♪  ♫   ♬   ♩   ♪   ♫   
+                </pre>
+            </div>
+        </header>
+
+        <section id="interactive-playground">
+            <h2>
+                <span class="ascii-icon">[^_^]</span> Live Coding Playground
+            </h2>
+            <div class="playground-instructions">
+                <p>Copy and Paste your musical composition. Edit code inside the playground!</p>
+                <p class="small">CNTRL + Click to Activate it.</p>
+            </div>
+            <div class="strudel-iframe">
+                <iframe id="strudel-frame" src="" frameborder="0"></iframe>
+            </div>
+        </section>
+
+        <section id="code-snippets">
+            <h2>
+                <span class="ascii-icon">[⌨_⌨]</span> Code Snippets
+            </h2>
+            <p class="snippet-intro">Copy these snippets and paste them into the playground above to experiment!</p>
+            
+            <div class="snippet-grid">
+                <div class="snippet-card" data-id="snippet-rhythm">
+                    <h3>Tricky Rhythm Mash-up</h3>
+                    <pre><code>  s("bd sd bd cr [~ bd] akaimpc60_bd akaimpc60_bd akaimpc60_bd, hh*16, misc")</code></pre>
+                    <button class="copy-btn">Copy</button>
+                </div>
+                
+                <div class="snippet-card" data-id="snippet-melody">
+                    <h3>Not So Simple Melody</h3>
+                    <pre><code>samples({
+'gtr': 'gtr/0001_cleanC.wav',
+'moog': { 'g3': 'moog/005_Mighty%20Moog%20G3.wav' },
+}, 'github:tidalcycles/dirt-samples');
+note("g3 g2 g1 [bb3 f1 c4] @16").s("gtr,moog").clip(1)
+.gain(.125) </code></pre>
+                    <button class="copy-btn">Copy</button>
+                </div>
+                
+                <div class="snippet-card" data-id="snippet-bass">
+                    <h3>SHABDA rhythm & bass</h3>
+                    <pre><code>samples('shabda:bass:4,hihat:4,rimshot:2')
+
+$: n("0 1 2 3 0 1 2 3").s('bass')
+$: n("0 1*2 2 3*2").s('hihat').clip(1)
+$: n("~ 0 ~ 1 ~ 0 0 1").s('rimshot')</code></pre>
+                    <button class="copy-btn">Copy</button>
+                </div>
+                
+                <div class="snippet-card" data-id="snippet-effects">
+                    <h3>Make it Speak</h3>
+                    <pre><code>samples('shabda/speech:the_drum,forever')
+samples('shabda/speech/fr-FR/m:magnifique')
+
+$: s("the_drum*2").chop(16).speed(rand.range(0.85,1.1))
+$: s("forever magnifique").slow(4).late(0.125)</code></pre>
+                    <button class="copy-btn">Copy</button>
+                </div>
+                
+                <div class="snippet-card" data-id="snippet-random">
+                    <h3>Scales and SFX</h3>
+                    <pre><code>n(run(5)).scale("D:minor").s("piano").release(2.2)
+.phaser("<1 2 4 8>")</code></pre>
+                    <button class="copy-btn">Copy</button>
+                </div>
+                
+<div class="snippet-card" data-id="snippet-stack">
+    <h3>FULL SONG SAMPLE</h3>
+    <pre><code>
+// "coastline" @by eddyflux
+// @version 1.0
+samples('github:eddyflux/crate')
+setcps(.75)
+let chords = chord("&lt;Bbm9 F2&gt;/4").dict('ireal')
+
+stack(
+  stack( // DRUMS
+    s("bd").struct("&lt;[x*&lt;1 2&gt; [~@3 x]] x&gt;"),
+    s("~ [rim, sd:&lt;2 3&gt;]").room("&lt;0 .2&gt;"),
+    n("[0 &lt;1 3&gt;]*&lt;2!3 4&gt;").s("hh"),
+    s("rd:&lt;1!3 2&gt;*2").mask("&lt;0 0 1 1&gt;/16".early(.5))
+  ).bank('crate')
+  .mask("&lt;[0 1] 1 1 1&gt;/16".early(.5))
+  , // CHORDS
+  chords.offset(-1).voicing().s("gm_epiano1:1")
+  .phaser(4).room(.5)
+  , // MELODY
+  n("&lt;0!3 1*2&gt;").set(chords).mode("root:g2")
+  .voicing().s("gm_acoustic_bass"),
+  chords.n("[0 &lt;4 3 &lt;2 5&gt;&gt;*2](&lt;3 5&gt;,8)")
+  .anchor("D5").voicing()
+  .segment(4).clip(rand.range(.4,.8))
+  .room(.75).shape(.3).delay(.25)
+  .fm(sine.range(3,8).slow(8))
+  .lpf(sine.range(500,1000).slow(8)).lpq(5)
+  .rarely(ply("2")).chunk(4, fast(2))
+  .gain(perlin.range(.6, .9))
+  .mask("&lt;0 1 1 0&gt;/16")
+)
+.late("[0 .01]*4").late("[0 .01]*2").size(4)
+</code></pre>
+                    <button class="copy-btn">Copy</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Keep your existing sections -->
+        <section id="milestones">
+            <h2>
+                <span class="ascii-icon">[•_•]</span> First Steps
+            </h2>
+            <div class="milestones-container">
+                <div class="milestone-card" data-id="milestone-1">
+                    <h3>1. Make Your First Sound</h3>
+                    <p>Click the buttons above to hear different patterns</p>
+                    <a href="#interactive-playground" class="milestone-link">Try It →</a>
+                </div>
+                <div class="milestone-card" data-id="milestone-2">
+                    <h3>2. Edit the Code</h3>
+                    <p>Click inside the playground to modify the code</p>
+                    <a href="https://strudel.cc/learn/" class="milestone-link" target="_blank">Learn How →</a>
+                </div>
+                <div class="milestone-card" data-id="milestone-3">
+                    <h3>3. Create a Pattern</h3>
+                    <p>Combine different sounds into your own rhythm</p>
+                    <a href="https://strudel.cc/learn/mondo-notation/" class="milestone-link" target="_blank">Tutorial →</a>
+                </div>
+                <div class="milestone-card" data-id="milestone-4">
+                    <h3>4. Share Your Creation</h3>
+                    <p>Copy the URL to save and share your work</p>
+                    <a href="https://strudel.cc/intro/showcase/" class="milestone-link" target="_blank">How To →</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="toolbox">
+            <h2>
+                <span class="ascii-icon">[⌐■_■]</span> Toolbox
+            </h2>
+            <div class="tool-grid">
+                <a href="https://strudel.cc" class="tool-card" target="_blank" data-id="tool-strudel">
+                    <h3>Strudel REPL</h3>
+                    <p>Live coding environment for music</p>
+                </a>
+                <a href="https://strudel.cc/learn/" class="tool-card" target="_blank" data-id="tool-tutorials">
+                    <h3>Strudel Tutorials</h3>
+                    <p>Interactive learning guides</p>
+                </a>
+                <a href="https://tidalcycles.org/" class="tool-card" target="_blank" data-id="tool-tidal">
+                    <h3>Tidal Cycles</h3>
+                    <p>Pattern language for music</p>
+                </a>
+                <a href="https://hydra.ojack.xyz/" class="tool-card" target="_blank" data-id="tool-hydra">
+                    <h3>Hydra</h3>
+                    <p>Live coding visual synth</p>
+                </a>
+            </div>
+        </section>
+
+        <section id="tutorials">
+            <h2>
+                <span class="ascii-icon">[◕_◕]</span> Code Library
+            </h2>
+            <div class="tutorial-grid">
+                <div class="tutorial-card">
+                    <h3>Getting Started</h3>
+                    <ul>
+                        <li><a href="https://strudel.cc/learn/mini.html" target="_blank" data-id="tut-mini">Mini Tutorial</a></li>
+                        <li><a href="https://strudel.cc/learn/basics.html" target="_blank" data-id="tut-basics">Pattern Basics</a></li>
+                        <li><a href="https://strudel.cc/learn/samples.html" target="_blank" data-id="tut-samples">Using Samples</a></li>
+                    </ul>
+                </div>
+                <div class="tutorial-card">
+                    <h3>Next Steps</h3>
+                    <ul>
+                        <li><a href="https://strudel.cc/learn/synths.html" target="_blank" data-id="tut-synths">Synthesizers</a></li>
+                        <li><a href="https://strudel.cc/learn/effects.html" target="_blank" data-id="tut-effects">Effects</a></li>
+                        <li><a href="https://strudel.cc/learn/randomness.html" target="_blank" data-id="tut-random">Randomness</a></li>
+                    </ul>
+                </div>
+                <div class="tutorial-card">
+                    <h3>Advanced</h3>
+                    <ul>
+                        <li><a href="https://strudel.cc/learn/patterns.html" target="_blank" data-id="tut-patterns">Pattern Functions</a></li>
+                        <li><a href="https://strudel.cc/learn/osc.html" target="_blank" data-id="tut-osc">OSC & MIDI</a></li>
+                        <li><a href="https://strudel.cc/learn/custom.html" target="_blank" data-id="tut-custom">Custom Functions</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>CodeSonic Lab // Live Coding Workshop</p>
+            <p class="small">No accounts needed. Your progress is saved in this browser.</p>
+            <p class="small">Made with ❤️ for creative coders</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
